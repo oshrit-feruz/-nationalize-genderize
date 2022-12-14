@@ -1,19 +1,23 @@
 import "./App.css";
 import axios from "axios";
-import { useState } from "react";
-import { setName } from "./redux/nameSlice";
+import { setName, setNameData } from "./redux/nameSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
+import { TextField, Button } from "@mui/material";
+import { useFormControl } from "@mui/material/FormControl";
 
 function App() {
+  const nameDataState = useSelector((state: RootState) => state.name.nameData);
   const nameState = useSelector((state: RootState) => state.name.name);
   const dispatch = useDispatch();
   const urlWithProxy = "/api/v1";
 
   function nameCheck() {
+    console.log("try axios");
+
     axios
-      .get(urlWithProxy + "/nameCheck")
-      .then((res) => dispatch(setName(res.data)))
+      .post(urlWithProxy + "/checkName", { newName: nameState })
+      .then((res) => dispatch(setNameData(res.data)))
       .catch((err) => {
         console.error(err);
       });
@@ -21,8 +25,15 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={nameCheck}>Check your name</button>
-      <p>data : {nameState}</p>
+      <TextField
+        id="outlined-basic"
+        variant="outlined"
+        onChange={(newValue) => dispatch(setName(newValue.target.value))}
+      />{" "}
+      <p>data : {nameDataState}</p>
+      <Button onClick={nameCheck} variant="contained">
+        Check it!
+      </Button>
     </div>
   );
 }
