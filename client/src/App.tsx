@@ -1,15 +1,19 @@
 import "./App.css";
 import axios from "axios";
 import { useState } from "react";
+import { setName } from "./redux/nameSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./redux/store";
 
 function App() {
-  const [data, setData] = useState();
+  const nameState = useSelector((state: RootState) => state.name.name);
+  const dispatch = useDispatch();
   const urlWithProxy = "/api/v1";
 
-  function getDataFromServer() {
+  function nameCheck() {
     axios
-      .get(urlWithProxy)
-      .then((res) => setData(res.data))
+      .get(urlWithProxy + "/nameCheck")
+      .then((res) => dispatch(setName(res.data)))
       .catch((err) => {
         console.error(err);
       });
@@ -17,8 +21,8 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={getDataFromServer}>Access server using proxy</button>
-      <p>data : {data}</p>
+      <button onClick={nameCheck}>Check your name</button>
+      <p>data : {nameState}</p>
     </div>
   );
 }
