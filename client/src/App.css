@@ -44,7 +44,7 @@ body {
   height: 100%;
   font-family: 'Varela Round';
 
-  overflow: hidden
+  overflow-x: hidden
 }
 button {
   font-size: calc(10px + 2vmin);
@@ -70,3 +70,14 @@ button {
 }
 button {
   margin-left: 20px !important;}
+  .MuiButtonBase-root {
+    
+    background-color: #d6d6e680 !important;
+    border-radius: 8px !important;
+    padding: 8px !important;}
+    .innerTableContainer{
+      margin: 0 auto;
+    width: fit-content;
+    max-width: 96vw;
+
+    }

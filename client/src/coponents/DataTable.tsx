@@ -50,18 +50,22 @@ export default function DataTable() {
         `,
       })
       .then((result) => {
+        console.log(result);
+
         dispatch(setPrevNamesData(result.data.namesData));
       });
   }, []);
   const [rows, setRows] = useState<NameData[]>(prevNamesData!);
   const [searched, setSearched] = useState<string>("");
-
   const requestSearch = (searchedVal: string) => {
     const filteredRows = prevNamesData?.filter((row) => {
       return row.name.toLowerCase().includes(searchedVal.toLowerCase());
     });
     setRows(filteredRows!);
   };
+  useEffect(() => {
+    setRows(prevNamesData!);
+  }, [prevNamesData]);
 
   const cancelSearch = () => {
     setSearched("");
@@ -69,8 +73,8 @@ export default function DataTable() {
   };
 
   return (
-    <>
-      <Paper>
+    <div className="tableContainer">
+      <Paper className="innerTableContainer">
         <SearchBar
           value={searched}
           onChange={(searchVal) => requestSearch(searchVal)}
@@ -124,84 +128,6 @@ export default function DataTable() {
           </Table>
         </TableContainer>
       </Paper>
-    </>
+    </div>
   );
 }
-
-// const useStyles = makeStyles({
-//   table: {
-//     minWidth: 650
-//   }
-// });
-
-// = [
-//   { name: "Pizza", calories: 200, fat: 6.0, carbs: 24, protein: 4.0 },
-//   { name: "Hot Dog", calories: 300, fat: 6.0, carbs: 24, protein: 4.0 },
-//   { name: "Burger", calories: 400, fat: 6.0, carbs: 24, protein: 4.0 },
-//   { name: "Hamburger", calories: 500, fat: 6.0, carbs: 24, protein: 4.0 },
-//   { name: "Fries", calories: 600, fat: 6.0, carbs: 24, protein: 4.0 },
-//   { name: "Ice Cream", calories: 700, fat: 6.0, carbs: 24, protein: 4.0 }
-// ];
-
-// export default function BasicTable() {
-//   const [rows, setRows] = useState<food[]>(prevNamesData?);
-//   const [searched, setSearched] = useState<string>("");
-//   const classes = useStyles();
-
-//   const requestSearch = (searchedVal: string) => {
-//     const filteredRows = prevNamesData?.filter((row) => {
-//       return row.name.toLowerCase().includes(searchedVal.toLowerCase());
-//     });
-//     setRows(filteredRows);
-//   };
-
-//   const cancelSearch = () => {
-//     setSearched("");
-//     requestSearch(searched);
-//   };
-
-//   return (
-//     <>
-//       <Paper>
-//         <SearchBar
-//           value={searched}
-//           onChange={(searchVal) => requestSearch(searchVal)}
-//           onCancelSearch={() => cancelSearch()}
-//         />
-//         <TableContainer>
-//           <Table className={classes.table} aria-label="simple table">
-//             <TableHead>
-//               <TableRow>
-//                 <TableCell>Food (100g serving)</TableCell>
-//                 <TableCell align="right">Calories</TableCell>
-//                 <TableCell align="right">Fat&nbsp;(g)</TableCell>
-//                 <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-//                 <TableCell align="right">Protein&nbsp;(g)</TableCell>
-//               </TableRow>
-//             </TableHead>
-//             <TableBody>
-//               {rows.map((row) => (
-//                 <TableRow key={row.name}>
-//                   <TableCell component="th" scope="row">
-//                     {row.name}
-//                   </TableCell>
-//                   <TableCell align="right">{row.calories}</TableCell>
-//                   <TableCell align="right">{row.fat}</TableCell>
-//                   <TableCell align="right">{row.carbs}</TableCell>
-//                   <TableCell align="right">{row.protein}</TableCell>
-//                 </TableRow>
-//               ))}
-//             </TableBody>
-//           </Table>
-//         </TableContainer>
-//       </Paper>
-//       <br />
-//       <a
-//         target="_blank"
-//         href="https://smartdevpreneur.com/the-easiest-way-to-implement-material-ui-table-search/"
-//       >
-//         Learn how to add search and filter to Material-UI Table here.
-//       </a>
-//     </>
-//   );
-// }

@@ -9,12 +9,9 @@ import { NameData } from "../types";
 import { dataModal } from "./models";
 export function initMongoose() {
   mongoose
-    .connect(
-      "mongodb+srv://oshrit:rVasLQa1x1obN5yL@cluster0.ugymhdf.mongodb.net/?retryWrites=true&w=majority",
-      {
-        dbName: "names_data",
-      }
-    )
+    .connect(url!, {
+      dbName: "names_data",
+    })
     .then(async () => {
       console.log("MongoDB Connection successful");
       return (await expressServer()).listen(PORT, () =>
