@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -42,7 +42,9 @@ function InputCard() {
     } } 
         `,
       })
-      .then((result) => dispatch(setNameData(result.data.nameData)));
+      .then((result) => {
+        dispatch(setNameData(result.data.nameData));
+      });
   }
 
   let cardComponent = nameDataState?.gender.probability ? (

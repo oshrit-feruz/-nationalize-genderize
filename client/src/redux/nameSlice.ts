@@ -13,6 +13,7 @@ export interface NameData {
   nationality: nationality[];
 }
 export interface NameState {
+  prevNamesData: NameData[] | undefined;
   name: string;
   nameData: NameData | undefined;
 }
@@ -22,6 +23,7 @@ export interface NameState {
 const initialState: NameState = {
   name: "",
   nameData: undefined,
+  prevNamesData: undefined,
 };
 // all question state and the chossen question state
 export const nameSlice = createSlice({
@@ -34,10 +36,13 @@ export const nameSlice = createSlice({
     setNameData: (state: NameState, action: PayloadAction<NameData>) => {
       state.nameData = action.payload;
     },
+    setPrevNamesData: (state: NameState, action: PayloadAction<NameData[]>) => {
+      state.prevNamesData = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setName, setNameData } = nameSlice.actions;
+export const { setName, setNameData, setPrevNamesData } = nameSlice.actions;
 
 export default nameSlice.reducer;

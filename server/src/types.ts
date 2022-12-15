@@ -45,7 +45,7 @@ export const typeDefs = gql`
   }
 
   type Query {
-    namesData: [NameData]
+    namesData: [NameData]!
   }
   type Query {
     nameData(name: String!): NameData

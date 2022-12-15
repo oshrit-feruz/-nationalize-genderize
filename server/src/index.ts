@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
+import { initMongoose } from "./db/mongoDb";
 import { expressMiddleware } from "@apollo/server/express4";
 import init from "./graphql";
 import bodyParser from "body-parser";
-const PORT = 4000;
-(async () => {
+export async function expressServer() {
   const server = init();
   const app = express();
   app.use(cors());
@@ -16,5 +16,6 @@ const PORT = 4000;
     expressMiddleware(server)
   );
 
-  app.listen(PORT, () => console.log(`start listening on port : ${PORT}`));
-})();
+  return app;
+}
+initMongoose();
