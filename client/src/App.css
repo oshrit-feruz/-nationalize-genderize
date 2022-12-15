@@ -81,3 +81,17 @@ button {
     max-width: 96vw;
 
     }
+    .MuiTableCell-alignRight{
+      
+  font-family: 'Varela Round';
+    }
+    .css-46bh2p-MuiCardContent-root:last-child {
+      padding-bottom: 0px;
+      margin-bottom: 3px;
+  }
+  .MuiInputBase-input:-webkit-autofill {
+    padding: 11px;}
+  .MuiPaper-elevation1 {
+    margin-bottom: 29px;}
+    .MuiTableCell-head {
+      background-color: #474aa438;}

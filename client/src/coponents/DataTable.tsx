@@ -7,7 +7,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import SearchBar from "material-ui-search-bar";
-
 import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,36 +24,6 @@ export default function DataTable() {
   const prevNamesData = useSelector(
     (state: RootState) => state.name.prevNamesData
   );
-  const dispatch = useDispatch();
-  const client = new ApolloClient({
-    uri: "http://localhost:4000/graphql/",
-    cache: new InMemoryCache(),
-  });
-  useEffect(() => {
-    client
-      .query({
-        query: gql`
-          query {
-            namesData {
-              name
-              gender {
-                gender
-                probability
-              }
-              nationality {
-                country_id
-                probability
-              }
-            }
-          }
-        `,
-      })
-      .then((result) => {
-        console.log(result);
-
-        dispatch(setPrevNamesData(result.data.namesData));
-      });
-  }, []);
   const [rows, setRows] = useState<NameData[]>(prevNamesData!);
   const [searched, setSearched] = useState<string>("");
   const requestSearch = (searchedVal: string) => {
@@ -63,6 +32,14 @@ export default function DataTable() {
     });
     setRows(filteredRows!);
   };
+  const dispatch = useDispatch();
+  const client = new ApolloClient({
+    uri: "http://localhost:4000/graphql/",
+    cache: new InMemoryCache(),
+  });
+  useEffect(() => {
+ 
+  }, []);
   useEffect(() => {
     setRows(prevNamesData!);
   }, [prevNamesData]);

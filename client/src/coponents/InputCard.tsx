@@ -26,10 +26,13 @@ function InputCard() {
   });
 
   function nameCheck() {
+    // Checking that the input is correct.
+    if (nameState !== null && nameState !== "") {
+    }
     client
       .query({
         query: gql`
-          query {nameData (name:"${nameState}") {
+          query {nameData (name:"${nameState.toLowerCase()}") {
             name
               gender{
                 gender
@@ -46,7 +49,7 @@ function InputCard() {
         dispatch(setNameData(result.data.nameData));
       });
   }
-
+  // Rendering the card that display the data after clicking the data search
   let cardComponent = nameDataState?.gender.probability ? (
     <div className="card">
       <Card>

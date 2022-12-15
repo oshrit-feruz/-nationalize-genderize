@@ -1,4 +1,5 @@
 import { gql } from "apollo-server";
+// Types and Inputs file.
 export type Gender = {
   gender: string;
   probability: number;

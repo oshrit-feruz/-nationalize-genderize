@@ -4,6 +4,7 @@ import { initMongoose } from "./db/mongoDb";
 import { expressMiddleware } from "@apollo/server/express4";
 import init from "./graphql";
 import bodyParser from "body-parser";
+//  Initialize the express Server options.
 export async function expressServer() {
   const server = init();
   const app = express();

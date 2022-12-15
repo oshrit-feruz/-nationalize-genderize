@@ -1,25 +1,18 @@
 import { getNameData } from "../api";
 import { dataModal } from "./models";
 import { getAllHistory, saveNameData } from "./mongoDb";
-const namesData = [
-  {
-    name: "",
-    gender: {
-      gender: "",
-      probability: 0,
-    },
-    nationality: [],
-  },
-];
+// The query and the mutation states managing.
 export const resolvers = {
   Query: {
     namesData: async () => {
       const prevData = await getAllHistory();
       return prevData;
     },
+    // Function that return the data from the external API
     nameData: async (parent: any, args: any) => {
       const data = await getNameData(args.name);
 
+      // Function that saving the name data into the Database
       saveNameData(data).catch((error) => {
         console.log(error);
       });

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { NameData } from "./types";
+// Requests from an external API
 export async function getNameData(name: string) {
   let dataFromApi: NameData = {
     name: "",
