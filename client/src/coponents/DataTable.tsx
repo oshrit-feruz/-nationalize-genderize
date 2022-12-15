@@ -38,7 +38,29 @@ export default function DataTable() {
     cache: new InMemoryCache(),
   });
   useEffect(() => {
- 
+    client
+      .query({
+        query: gql`
+          query {
+            namesData {
+              name
+              gender {
+                gender
+                probability
+              }
+              nationality {
+                country_id
+                probability
+              }
+            }
+          }
+        `,
+      })
+      .then((result) => {
+        console.log(result);
+
+        dispatch(setPrevNamesData(result.data.namesData));
+      });
   }, []);
   useEffect(() => {
     setRows(prevNamesData!);
