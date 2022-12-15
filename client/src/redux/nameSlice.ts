@@ -1,21 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+export interface gender {
+  gender: string;
+  probability: number;
+}
+export interface nationality {
+  country_id: string;
+  probability: number;
+}
 export interface NameData {
   name: string;
-  gender: string;
-  nationality: string[];
-  probability: number;
+  gender: gender;
+  nationality: nationality[];
 }
 export interface NameState {
   name: string;
-  nameData: NameData | null;
+  nameData: NameData | undefined;
 }
 /**
  * @type {}
  */
 const initialState: NameState = {
   name: "",
-  nameData: null,
+  nameData: undefined,
 };
 // all question state and the chossen question state
 export const nameSlice = createSlice({
@@ -32,6 +38,6 @@ export const nameSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setName ,setNameData } = nameSlice.actions;
+export const { setName, setNameData } = nameSlice.actions;
 
 export default nameSlice.reducer;

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -36,7 +37,25 @@
     transform: rotate(360deg);
   }
 }
+body {
+  
+  min-height: 100vh;
+  margin: 0;
+  height: 100%;
+  font-family: 'Varela Round';
 
+  overflow: hidden
+}
 button {
   font-size: calc(10px + 2vmin);
+}
+.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  background-color: #d6d6e680 !important;
+  margin: 0 auto;
+  width: 28vw;
+  margin-top: 25px;
+  font-family: 'Varela Round';
+  height: max-content;
+  padding-bottom: 15px;
+  height: fit-content;
 }
