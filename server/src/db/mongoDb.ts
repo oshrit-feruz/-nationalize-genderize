@@ -1,8 +1,8 @@
 import * as mongoDB from "mongodb";
 import * as dotenv from "dotenv";
 import mongoose from "mongoose";
-const PORT = 4000;
 dotenv.config();
+const PORT = process.env.YOUR_PORT || process.env.PORT || 4000;;
 const url = process.env.MONGO_DB_URI;
 import { expressServer } from "..";
 import { NameData } from "../types";

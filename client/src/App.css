@@ -52,7 +52,7 @@ button {
 .css-bhp9pd-MuiPaper-root-MuiCard-root {
   background-color: #d6d6e680 !important;
   margin: 0 auto;
-  width: 28vw;
+  width: fit-content;
   margin-top: 25px;
   font-family: 'Varela Round';
   height: max-content;
@@ -85,6 +85,11 @@ button {
       
   font-family: 'Varela Round';
     }
+    .card{
+      
+    width: fit-content;
+    margin: 0 auto;
+    }
     .css-46bh2p-MuiCardContent-root:last-child {
       padding-bottom: 0px;
       margin-bottom: 3px;
@@ -92,6 +97,8 @@ button {
   .MuiInputBase-input:-webkit-autofill {
     padding: 11px;}
   .MuiPaper-elevation1 {
+    background-color: #e1e7f65c !important;
+;
     margin-bottom: 29px;}
     .MuiTableCell-head {
       background-color: #474aa438;}

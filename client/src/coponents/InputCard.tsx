@@ -27,8 +27,16 @@ function InputCard() {
 
   function nameCheck() {
     // Checking that the input is correct.
-    if (nameState !== null && nameState !== "") {
+    // Checking that the input is correct.
+    if (
+      nameState !== null &&
+      nameState !== " " &&
+      typeof nameState === "string" &&
+      nameState !== "" &&
+      nameState
+    ) {
     }
+
     client
       .query({
         query: gql`
@@ -46,49 +54,56 @@ function InputCard() {
         `,
       })
       .then((result) => {
-        dispatch(setNameData(result.data.nameData));
+        if(result.data.nameData.gender.probability !==0){
+          
+          
+          dispatch(setNameData(result.data.nameData));
+        }
       });
   }
   // Rendering the card that display the data after clicking the data search
-  let cardComponent = nameDataState?.gender.probability ? (
-    <div className="card">
-      <Card>
-        <CardContent>
-          <Typography
-            fontFamily={"Varela Round"}
-            variant="h5"
-            color="text"
-            gutterBottom
-          >
-            {nameDataState.name}
-          </Typography>
-          <Typography component="div" fontFamily={"Varela Round"}>
-            The probability is {nameDataState.gender.probability}
-            <br /> for {nameDataState.name} to be {nameDataState.gender.gender}
-          </Typography>{" "}
-          <Typography component="div" fontFamily={"Varela Round"}>
-            {nameDataState?.nationality.map((country) => {
-              return (
-                <Typography
-                  style={{ margin: "5px" }}
-                  component="div"
-                  fontFamily={"Varela Round"}
-                >
-                  {" "}
-                  the probability is {country.probability} to be from{" "}
-                  {country.country_id}
-                </Typography>
-              );
-            })}
-          </Typography>
-        </CardContent>
-      </Card>
-    </div>
-  ) : (
-    <></>
-  );
+  let cardComponent =
+    nameDataState?.gender.probability! > 0 ? (
+      <div className="card">
+        <Card>
+          <CardContent>
+            <Typography
+              fontFamily={"Varela Round"}
+              variant="h5"
+              color="text"
+              gutterBottom
+            >
+              {nameDataState!.name}
+            </Typography>
+            <Typography component="div" fontFamily={"Varela Round"}>
+              The probability is {nameDataState!.gender.probability}
+              <br /> for {nameDataState!.name} to be{" "}
+              {nameDataState!.gender.gender}
+            </Typography>{" "}
+            <Typography component="div" fontFamily={"Varela Round"}>
+              {nameDataState?.nationality.map((country) => {
+                return (
+                  <Typography
+                    style={{ margin: "5px" }}
+                    component="div"
+                    fontFamily={"Varela Round"}
+                  >
+                    {" "}
+                    the probability is {country.probability} to be from{" "}
+                    {country.country_id}
+                  </Typography>
+                );
+              })}
+            </Typography>
+          </CardContent>
+        </Card>
+      </div>
+    ) : (
+      <></>
+    );
   return (
     <div className="header">
+      <h1>Check your name: </h1>
       <div className="inputDuo">
         <TextField
           type="string"

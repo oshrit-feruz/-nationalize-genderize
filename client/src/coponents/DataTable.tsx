@@ -24,6 +24,7 @@ export default function DataTable() {
   const prevNamesData = useSelector(
     (state: RootState) => state.name.prevNamesData
   );
+  const nameDataState = useSelector((state: RootState) => state.name.nameData);
   const [rows, setRows] = useState<NameData[]>(prevNamesData!);
   const [searched, setSearched] = useState<string>("");
   const requestSearch = (searchedVal: string) => {
@@ -38,33 +39,39 @@ export default function DataTable() {
     cache: new InMemoryCache(),
   });
   useEffect(() => {
-    client
-      .query({
-        query: gql`
-          query {
-            namesData {
-              name
-              gender {
-                gender
-                probability
-              }
-              nationality {
-                country_id
-                probability
+    setTimeout(() => {
+      client
+        .query({
+          query: gql`
+            query {
+              namesData {
+                name
+                gender {
+                  gender
+                  probability
+                }
+                nationality {
+                  country_id
+                  probability
+                }
               }
             }
-          }
-        `,
-      })
-      .then((result) => {
-        console.log(result);
-
-        dispatch(setPrevNamesData(result.data.namesData));
-      });
-  }, []);
+          `,
+        })
+        .then((result) => {
+          console.log(result.data.namesData);
+          let dataArray = result.data.namesData.filter(
+            (nameData: { gender: { probability: number } }) =>
+              nameData.gender.probability > 0
+          );
+          console.log(dataArray);
+          dispatch(setPrevNamesData(dataArray));
+        });
+    }, 1000);
+  }, [nameDataState]);
   useEffect(() => {
     setRows(prevNamesData!);
-  }, [prevNamesData]);
+  }, [prevNamesData, nameDataState]);
 
   const cancelSearch = () => {
     setSearched("");

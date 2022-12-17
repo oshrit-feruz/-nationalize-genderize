@@ -1,5 +1,6 @@
 # Nationalize-Genderize App💭
 ' Nationalize-Genderize' is a name search for predictade your gender and your countries that you possibly at.🧒
+[Click Here](https://nationalize-genderize.netlify.app/) to check your name!😃
 
 This code also store all of the past requests and rendering it into a table.
 ## Technology
