@@ -1,5 +1,6 @@
 # Nationalize-Genderize App💭
-' Nationalize-Genderize' is a name search for predictade your gender and your countries that you possibly at.🧒
+'Nationalize-Genderize' is a name search for predictade your gender and your countries that you possibly at.🧒
+
 [Click Here](https://nationalize-genderize.netlify.app/) to check your name!😃
 
 This code also store all of the past requests and rendering it into a table.
@@ -23,6 +24,6 @@ I used Vite in the very first time and found it very quick and simple, I would d
 ## How to run the project 
 ```bash
  git clone
- npm ci
+ cd ./client npm ci & cd ../server npm ci cd ../
  npm run dev
 ```
